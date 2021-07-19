@@ -14,10 +14,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private UserDetailsService detailsService;
 
     public UserServiceImpl(){}
 
@@ -45,12 +47,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<User> getAllUsers() {
         return userRepo.getAllUsers();
     }
-
-    // «Пользователь» – это просто Object. В большинстве случаев он может быть
-    //  приведен к классу UserDetails.
-    // Для создания UserDetails используется интерфейс UserDetailsService, с единственным методом:
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.getUserByUsername(username);
+    public UserDetailsService getDetailsService(){
+        return detailsService;
     }
 }

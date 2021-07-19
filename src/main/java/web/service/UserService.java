@@ -5,7 +5,7 @@ import web.model.User;
 
 import java.util.List;
 
-public interface UserService extends UserDetailsService {
+public interface UserService {
     void addUser(User user);
 
     void deleteUser(Long id);
@@ -15,4 +15,5 @@ public interface UserService extends UserDetailsService {
     User getUserById(Long id);
 
     List<User> getAllUsers();
+    UserDetailsService getDetailsService();
 }

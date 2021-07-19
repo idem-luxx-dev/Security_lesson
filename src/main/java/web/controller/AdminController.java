@@ -36,10 +36,10 @@ public class AdminController {
     public String postUser(@ModelAttribute("user") User user,
                            @RequestParam(required=false) String role) {
         Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getRoleByName("ROLE_USER"));
+        roles.add(roleService.getDefaultRole());
 
         if (role != null && role.equals("ROLE_ADMIN")) {
-            roles.add(roleService.getRoleByName("ROLE_ADMIN"));
+            roles.add(roleService.getRoleByName(role));
         }
         user.setRoles(roles);
         userService.addUser(user);
@@ -65,9 +65,9 @@ public class AdminController {
                                @RequestParam(required=false) String role) {
 
         Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getRoleByName("ROLE_USER"));
+        roles.add(roleService.getRoleByName(role));
         if (role != null && role.equals("ROLE_ADMIN")) {
-            roles.add(roleService.getRoleByName("ROLE_ADMIN"));
+            roles.add(roleService.getRoleByName(role));
         }
         user.setRoles(roles);
         userService.editUser(user);
